@@ -27,9 +27,9 @@ public class SongView extends LinearLayout {
     private Paint gradientPaint;
     private int[] currentGradient;
 
-    private TextView weatherDescription;
-    private TextView weatherTemperature;
-    private ImageView weatherImage;
+    private TextView artistname;
+    private TextView songname;
+    private ImageView songImage;
 
     private ArgbEvaluator evaluator;
 
@@ -58,11 +58,11 @@ public class SongView extends LinearLayout {
 
         setOrientation(VERTICAL);
         setGravity(Gravity.CENTER_HORIZONTAL);
-        inflate(getContext(), R.layout.view_forecast, this);
+        inflate(getContext(), R.layout.view_song, this);
 
-        weatherDescription = (TextView) findViewById(R.id.weather_description);
-        weatherImage = (ImageView) findViewById(R.id.weather_image);
-        weatherTemperature = (TextView) findViewById(R.id.weather_temperature);
+        artistname = (TextView) findViewById(R.id.artist_name);
+        songImage = (ImageView) findViewById(R.id.song_image);
+        songname = (TextView) findViewById(R.id.song_name);
     }
 
     private void initGradient() {
@@ -94,12 +94,12 @@ public class SongView extends LinearLayout {
         if (getWidth() != 0 && getHeight() != 0) {
             initGradient();
         }
-        weatherDescription.setText(artist.getDisplayName());
-        weatherTemperature.setText(song.getTemperature());
-        Glide.with(getContext()).load(weatherToIcon(artist)).into(weatherImage);
+        artistname.setText(artist.getDisplayName());
+        songname.setText(song.getSongName());
+        Glide.with(getContext()).load(weatherToIcon(artist)).into(songImage);
         invalidate();
 
-        weatherImage.animate()
+        songImage.animate()
                 .scaleX(1f).scaleY(1f)
                 .setInterpolator(new AccelerateDecelerateInterpolator())
                 .setDuration(300)
@@ -107,8 +107,8 @@ public class SongView extends LinearLayout {
     }
 
     public void onScroll(float fraction, Song oldS, Song newS) {
-        weatherImage.setScaleX(fraction);
-        weatherImage.setScaleY(fraction);
+        songImage.setScaleX(fraction);
+        songImage.setScaleY(fraction);
         currentGradient = mix(fraction,
                 weatherToGradient(newS.getArtist()),
                 weatherToGradient(oldS.getArtist()));
