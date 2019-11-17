@@ -102,7 +102,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         }
     }
 
-    private static class TintOnLoad implements RequestListener<Integer, GlideDrawable> {
+    private static class TintOnLoad implements RequestListener<Integer,GlideDrawable> {
 
         private ImageView imageView;
         private int tintColor;

@@ -88,15 +88,15 @@ public class SongView extends LinearLayout {
         super.onDraw(canvas);
     }
 
-    public void setForecast(Song song) {
+    public void setSong(Song song) {
         Artist artist = song.getArtist();
-        currentGradient = weatherToGradient(artist);
+        currentGradient = songToGradient(artist);
         if (getWidth() != 0 && getHeight() != 0) {
             initGradient();
         }
         artistname.setText(artist.getDisplayName());
         songname.setText(song.getSongName());
-        Glide.with(getContext()).load(weatherToIcon(artist)).into(songImage);
+        Glide.with(getContext()).load(songToIcon(artist)).into(songImage);
         invalidate();
 
         songImage.animate()
@@ -110,8 +110,8 @@ public class SongView extends LinearLayout {
         songImage.setScaleX(fraction);
         songImage.setScaleY(fraction);
         currentGradient = mix(fraction,
-                weatherToGradient(newS.getArtist()),
-                weatherToGradient(oldS.getArtist()));
+                songToGradient(newS.getArtist()),
+                songToGradient(oldS.getArtist()));
         initGradient();
         invalidate();
     }
@@ -124,7 +124,7 @@ public class SongView extends LinearLayout {
         };
     }
 
-    private int[] weatherToGradient(Artist artist) {
+    private int[] songToGradient(Artist artist) {
         switch (artist) {
             case PERIODIC_CLOUDS:
                 return colors(R.array.gradientPeriodicClouds);
@@ -141,7 +141,7 @@ public class SongView extends LinearLayout {
         }
     }
 
-    private int weatherToIcon(Artist artist) {
+    private int songToIcon(Artist artist) {
         switch (artist) {
             case PERIODIC_CLOUDS:
                 return R.drawable.periodic_clouds;

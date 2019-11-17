@@ -28,6 +28,7 @@ implements DiscreteScrollView.ScrollStateChangeListener<SongAdapter.ViewHolder>,
 
         SongStation songst=new SongStation();
         songs = songst.getSongs();
+
         songpicker = (DiscreteScrollView) findViewById(R.id.song_picker);
         songpicker.setSlideOnFling(true);
         songpicker.setAdapter(new SongAdapter(songs));
@@ -39,14 +40,14 @@ implements DiscreteScrollView.ScrollStateChangeListener<SongAdapter.ViewHolder>,
                 .setMinScale(0.8f)
                 .build());
 
-        songview.setForecast(songs.get(0));
+        songview.setSong(songs.get(0));
     }
 
     @Override
     public void onCurrentItemChanged(@Nullable SongAdapter.ViewHolder holder, int position) {
         //viewHolder will never be null, because we never remove items from adapter's list
         if (holder != null) {
-            songview.setForecast(songs.get(position));
+            songview.setSong(songs.get(position));
             holder.showText();
         }
     }
